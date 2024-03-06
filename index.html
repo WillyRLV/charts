@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Getting Started with Chart JS with www.chartjs3.com</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     * {
       margin: 0;
@@ -13,18 +14,19 @@
     }
 
     body {
-      height: 100vh;
+   
+      height: auto;
       width: 100vw;
     }
 
-  
+
 
 
 
     .chartCard {
-    
+
       width: 100%;
-      height: 100%;
+      height: 100vh;
       background: rgba(54, 162, 235, 0.2);
       display: flex;
       align-items: center;
@@ -54,14 +56,27 @@
 </head>
 
 <body>
-  
+
+
+
   <div class="chartCard">
-    <form id="excelForm">
+    <table id="tabla-container"></table>
+    <!-- <form id="excelForm">
       <input type="file" id="excelInput" accept=".xlsx">
-    </form>
+    </form> -->
     <span>Dni : <span id="aea"></span></span>
+    <div>
+      <p>74189636</p>
+      <p>81034567</p>
+      <p>01236878</p>
+      <p>96478932</p>
+      <p>65387965</p>
+    </div>
+    <input id="dni-input" placeholder="Ingrese un dni valido" type="text">
+    <button id="search" type="button">Buscar</button>
+    <button id="btn-del" type="button">mostrar tabla</button>
     <div class="chartBox">
-   
+
       <div class="scrollBox">
         <div class="scrollBoxBody">
           <canvas id="myChart"></canvas>
@@ -69,7 +84,6 @@
       </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/fs-js@1.0.6/index.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
@@ -77,10 +91,10 @@
 
 
   <script src="script.js">
-  
 
 
-  
+
+
   </script>
 
 </body>
