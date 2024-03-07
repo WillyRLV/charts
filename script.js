@@ -1026,7 +1026,7 @@ function searchData() {
     console.log(filteredData);
     renderChart()
     renderFirst(filteredData)
-    renderTable(filteredData)
+    // renderTable(filteredData)
   }
   // datos.map(item => console.log(item.dni))
 }
@@ -1046,8 +1046,22 @@ function renderFirst(params) {
       return ''; // Sin icono
     }
   }
+
+  console.log(params.map(item =>  item.pregunta))
   var data = {
-    labels: params.map(item => item.pregunta),
+    labels: params.map(frase => {
+      // Dividir la frase en partes de al menos 10 caracteres
+      const partes = [];
+      let inicio = 0;
+      while (inicio < frase.pregunta.length) {
+        const parte = frase.pregunta.slice(inicio, inicio + 18);
+        partes.push(parte);
+        inicio += 18
+      }
+      
+      // Devolver las partes como un array
+      return partes;
+    }),
     datasets: [
       {
         label: 'Credibilidad',
@@ -1096,6 +1110,10 @@ function renderFirst(params) {
         }
       },
       plugins: {
+        title:{
+          display:true,
+          text:'Resultados'
+        },
         datalabels: {
 
           formatter: function (value, context) {
@@ -1141,7 +1159,6 @@ function renderFirst(params) {
             position: 'center',
             autoSkip: false,
             padding: 10,
-
           },
         },
       },
@@ -1149,7 +1166,10 @@ function renderFirst(params) {
 
     plugins: [ChartDataLabels,
       {
+        
         afterDraw: function(chart) {
+
+
           var ctx = chart.ctx;
           chart.data.datasets.forEach(function(dataset, index) {
               var meta = chart.getDatasetMeta(index);
@@ -1182,9 +1202,15 @@ function renderFirst(params) {
                   });
               }
           });
-      }
-
-
+      
+        },
+        beforeInit: function (chart) {
+          // chart.options.scales.yAxes[0].ticks.paddingTop = 100; // Ajusta el espaciado superior
+          // chart.options.scales.yAxes[0].ticks.paddingBottom = 100; // Ajusta el espaciado inferior
+          
+          console.log(chart)
+    }
+        
       }
 
 
@@ -1219,7 +1245,7 @@ function renderFirst(params) {
     document.getElementById('myChart'),
     config
   );
-
+  myChart.resize();
   myOldChart = myChart;
 }
 
